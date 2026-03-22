@@ -1,4 +1,4 @@
-# 👁️ DrowseGuard — Driver Drowsiness Detector
+# 👁️ Drowse Detector — Driver Drowsiness Detector
 
 Real-time driver drowsiness detection web application using Python Flask, OpenCV, and Google MediaPipe Face Mesh.
 

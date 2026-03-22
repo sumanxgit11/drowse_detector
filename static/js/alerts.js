@@ -1,5 +1,5 @@
 /**
- * DrowseGuard — Drowsiness Alert System
+ * Drowse Detector — Drowsiness Alert System
  * Web Audio API beep + visual effects
  */
 
