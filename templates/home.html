@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Real-time AI-powered driver drowsiness detection using eye tracking and facial landmarks."/>
+  <title>DrowseGuard – Driver Drowsiness Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="brand-icon">👁️</span>
+        <span class="brand-text">DrowseGuard</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link active">Home</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero Section ── -->
+  <section class="hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Safety System
+      </div>
+      <h1 class="hero-title">
+        Stay Alert.<br/>
+        <span class="gradient-text">Stay Alive.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Real-time driver drowsiness detection using facial landmark analysis and Eye Aspect Ratio (EAR) 
+        algorithm — powered by OpenCV and MediaPipe.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="statEar">—</span>
+          <span class="stat-label">EAR Value</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="statAlerts">0</span>
+          <span class="stat-label">Alerts Triggered</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" id="statFrames">0</span>
+          <span class="stat-label">Frame Count</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Drowsiness Alert Overlay ── -->
+  <div class="alert-overlay" id="alertOverlay">
+    <div class="alert-content">
+      <div class="alert-icon">⚠️</div>
+      <h2 class="alert-title">DROWSINESS DETECTED!</h2>
+      <p class="alert-msg">Please pull over and rest immediately.</p>
+    </div>
+  </div>
+
+  <!-- ── Main Detection Panel ── -->
+  <main class="main-container">
+    <div class="detection-grid">
+
+      <!-- Video Feed Card -->
+      <div class="card video-card">
+        <div class="card-header">
+          <h2 class="card-title">Live Detection Feed</h2>
+          <div class="status-badge" id="statusBadge">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Idle</span>
+          </div>
+        </div>
+        <div class="video-wrapper" style="position: relative; overflow: hidden; background: #000;">
+          <video id="webcamVideo" autoplay playsinline style="display: none;"></video>
+          <canvas id="outputCanvas" width="640" height="480" class="video-feed" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 10;"></canvas>
+          <div class="video-placeholder" id="videoPlaceholder" style="z-index: 20;">
+            <div class="placeholder-icon">📷</div>
+            <p>Click <strong>Start Detection</strong> to begin</p>
+          </div>
+          <!-- Drowsy flash overlay on video -->
+          <div class="video-alert-flash" id="videoAlertFlash" style="z-index: 30;"></div>
+        </div>
+        <!-- Controls -->
+        <div class="video-controls">
+          <button class="btn btn-start" id="btnStart" onclick="startDetection()">
+            <span class="btn-icon">▶</span> Start Detection
+          </button>
+          <button class="btn btn-stop" id="btnStop" onclick="stopDetection()" disabled>
+            <span class="btn-icon">⏹</span> Stop Detection
+          </button>
+        </div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="info-panel">
+
+        <!-- Real-time metrics -->
+        <div class="card metrics-card">
+          <div class="card-header">
+            <h3 class="card-title">Real-time Metrics</h3>
+          </div>
+          <div class="metrics-list">
+            <div class="metric-row">
+              <span class="metric-label">Eye Aspect Ratio</span>
+              <div class="metric-bar-wrap">
+                <div class="metric-bar" id="earBar"></div>
+              </div>
+              <span class="metric-value" id="earValue">—</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Mouth Aspect Ratio (Yawn)</span>
+              <div class="metric-bar-wrap">
+                <div class="metric-bar" id="marBar"></div>
+              </div>
+              <span class="metric-value" id="marValue">—</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Head Pitch (Drop)</span>
+              <span class="metric-value" id="pitchValue">—</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Head Yaw (Turn)</span>
+              <span class="metric-value" id="yawValue">—</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Detection Status</span>
+              <span class="metric-pill" id="detectionStatus">Stopped</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Drowsy Frames</span>
+              <span class="metric-value" id="drowsyFrames">0</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Total Alerts</span>
+              <span class="metric-value accent" id="totalAlerts">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="card info-card">
+          <div class="card-header">
+            <h3 class="card-title">How It Works</h3>
+          </div>
+          <ol class="steps-list">
+            <li class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-text">
+                <strong>Face Detection</strong>
+                <p>MediaPipe Face Mesh locates the driver's face in each frame.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-text">
+                <strong>Landmark Mapping</strong>
+                <p>468 facial landmark points are predicted around the face and eyes.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-text">
+                <strong>EAR Calculation</strong>
+                <p>Eye Aspect Ratio computed from 6 eye landmarks per eye.</p>
+              </div>
+            </li>
+            <li class="step-item">
+              <div class="step-num">4</div>
+              <div class="step-text">
+                <strong>Alert Trigger</strong>
+                <p>EAR &lt; 0.22 for 20+ consecutive frames → drowsy alert fires.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Threshold Gauge -->
+        <div class="card gauge-card">
+          <div class="card-header">
+            <h3 class="card-title">EAR Safety Gauge</h3>
+          </div>
+          <div class="gauge-wrapper">
+            <div class="gauge-track">
+              <div class="gauge-zone zone-danger">Danger</div>
+              <div class="gauge-zone zone-warning">Caution</div>
+              <div class="gauge-zone zone-safe">Safe</div>
+              <div class="gauge-needle" id="gaugeNeedle"></div>
+            </div>
+            <div class="gauge-labels">
+              <span>0.0</span><span>0.22</span><span>0.35</span><span>0.5+</span>
+            </div>
+          </div>
+          <p class="gauge-note">Threshold: EAR &lt; <strong>0.22</strong> triggers drowsiness</p>
+        </div>
+
+      </div><!-- /info-panel -->
+    </div><!-- /detection-grid -->
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">👁️ DrowseGuard</span>
+      <span class="footer-copy">Built with OpenCV · MediaPipe · Flask · ❤️</span>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── MediaPipe and App Scripts ── -->
+  <script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

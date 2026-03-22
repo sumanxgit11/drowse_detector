@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Contact the DrowseGuard team — reach out with questions or feedback."/>
+  <title>Contact – DrowseGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}"/>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="brand-icon">👁️</span>
+        <span class="brand-text">DrowseGuard</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/contact" class="nav-link active">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Contact Hero ── -->
+  <section class="contact-hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="contact-hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Get In Touch</div>
+      <h1 class="hero-title">Have a <span class="gradient-text">Question?</span></h1>
+      <p class="hero-subtitle">We'd love to hear from you — whether you have a question, feedback, or want to collaborate on making roads safer.</p>
+    </div>
+  </section>
+
+  <!-- ── Contact Content ── -->
+  <section class="contact-section">
+    <div class="contact-container">
+
+      <!-- Info Cards -->
+      <div class="contact-info">
+        <div class="info-item glass-card">
+          <div class="info-item-icon">📧</div>
+          <div>
+            <h3>Email Us</h3>
+            <p>drowseguard@example.com</p>
+          </div>
+        </div>
+        <div class="info-item glass-card">
+          <div class="info-item-icon">🐙</div>
+          <div>
+            <h3>GitHub</h3>
+            <p>github.com/drowseguard</p>
+          </div>
+        </div>
+        <div class="info-item glass-card">
+          <div class="info-item-icon">📍</div>
+          <div>
+            <h3>Location</h3>
+            <p>Kathmandu, Nepal</p>
+          </div>
+        </div>
+        <div class="info-item glass-card">
+          <div class="info-item-icon">💬</div>
+          <div>
+            <h3>Response Time</h3>
+            <p>Within 24 hours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrap glass-card">
+        <h2 class="form-title">Send a Message</h2>
+        <form id="contactForm" class="contact-form" onsubmit="submitForm(event)" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="name" name="name" class="form-input" placeholder=" " required autocomplete="name"/>
+              <label class="form-label" for="name">Your Name</label>
+              <div class="form-underline"></div>
+              <span class="form-error" id="nameError">Name is required</span>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" class="form-input" placeholder=" " required autocomplete="email"/>
+              <label class="form-label" for="email">Email Address</label>
+              <div class="form-underline"></div>
+              <span class="form-error" id="emailError">Valid email is required</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="subject" name="subject" class="form-input" placeholder=" " required/>
+            <label class="form-label" for="subject">Subject</label>
+            <div class="form-underline"></div>
+            <span class="form-error" id="subjectError">Subject is required</span>
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" name="message" class="form-input form-textarea" placeholder=" " required rows="5"></textarea>
+            <label class="form-label" for="message">Message</label>
+            <div class="form-underline"></div>
+            <span class="form-error" id="messageError">Message is required</span>
+          </div>
+
+          <button type="submit" class="btn btn-submit" id="submitBtn">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-loader" id="btnLoader"></span>
+            <span class="btn-icon-send">✈️</span>
+          </button>
+        </form>
+
+        <!-- Success message -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✅</div>
+          <h3>Message Sent!</h3>
+          <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+          <button class="btn btn-start" onclick="resetForm()" style="margin-top:1rem">Send Another</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">👁️ DrowseGuard</span>
+      <span class="footer-copy">Built with OpenCV · MediaPipe · Flask · ❤️</span>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar
+    const ham = document.getElementById('hamburger');
+    if (ham) ham.addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open'));
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Form submit
+    function submitForm(e) {
+      e.preventDefault();
+      let valid = true;
+      ['name','email','subject','message'].forEach(id => {
+        const el = document.getElementById(id);
+        const err = document.getElementById(id + 'Error');
+        if (!el.value.trim() || (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+          el.parentElement.classList.add('error');
+          valid = false;
+        } else {
+          el.parentElement.classList.remove('error');
+        }
+      });
+      if (!valid) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('visible');
+      }, 1800);
+    }
+
+    function resetForm() {
+      document.getElementById('contactForm').reset();
+      document.getElementById('contactForm').style.display = '';
+      document.getElementById('formSuccess').classList.remove('visible');
+      document.getElementById('submitBtn').classList.remove('loading');
+      document.getElementById('submitBtn').disabled = false;
+    }
+  </script>
+</body>
+</html>

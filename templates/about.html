@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how DrowseGuard detects driver drowsiness using AI facial landmark analysis."/>
+  <title>About – DrowseGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}"/>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="brand-icon">👁️</span>
+        <span class="brand-text">DrowseGuard</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/about" class="nav-link active">About</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── About Hero ── -->
+  <section class="about-hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="about-hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>About The Project</div>
+      <h1 class="hero-title">The Science Behind <span class="gradient-text">Driver Safety</span></h1>
+      <p class="hero-subtitle">
+        DrowseGuard uses real-time computer vision and machine learning to detect signs of drowsiness 
+        before accidents happen. Here's how it works under the hood.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── EAR Explanation ── -->
+  <section class="about-section">
+    <div class="content-container">
+      <div class="section-header">
+        <h2 class="section-title gradient-text">Eye Aspect Ratio (EAR)</h2>
+        <p class="section-sub">The mathematical foundation of drowsiness detection</p>
+      </div>
+
+      <div class="ear-grid">
+        <div class="ear-diagram glass-card">
+          <div class="eye-diagram">
+            <div class="eye-shape">
+              <div class="landmark-point lp-p1" title="P1"><span class="lp-label">P1</span></div>
+              <div class="landmark-point lp-p2" title="P2"><span class="lp-label">P2</span></div>
+              <div class="landmark-point lp-p3" title="P3"><span class="lp-label">P3</span></div>
+              <div class="landmark-point lp-p4" title="P4"><span class="lp-label">P4</span></div>
+              <div class="landmark-point lp-p5" title="P5"><span class="lp-label">P5</span></div>
+              <div class="landmark-point lp-p6" title="P6"><span class="lp-label">P6</span></div>
+            </div>
+            <div class="ear-formula">
+              EAR = (||P2-P6|| + ||P3-P5||) / (2 × ||P1-P4||)
+            </div>
+          </div>
+        </div>
+
+        <div class="ear-info">
+          <div class="info-block glass-card">
+            <div class="info-icon">📐</div>
+            <h3>The Formula</h3>
+            <p>EAR measures the ratio of eye opening to eye width using 6 specific facial landmarks around each eye.</p>
+          </div>
+          <div class="info-block glass-card">
+            <div class="info-icon">🎯</div>
+            <h3>The Threshold</h3>
+            <p>An EAR below <strong class="accent">0.22</strong> indicates closed/nearly-closed eyes. If sustained for 20+ frames, drowsiness is declared.</p>
+          </div>
+          <div class="info-block glass-card">
+            <div class="info-icon">⚡</div>
+            <h3>Real-time Speed</h3>
+            <p>Processing runs at up to 30 FPS, providing near-instantaneous response to eye closure events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Technology Stack ── -->
+  <section class="about-section tech-section">
+    <div class="content-container">
+      <div class="section-header">
+        <h2 class="section-title gradient-text">Technology Stack</h2>
+        <p class="section-sub">Built on industry-proven computer vision libraries</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card glass-card">
+          <div class="tech-icon">🐍</div>
+          <h3 class="tech-name">Python 3</h3>
+          <p class="tech-desc">Core language powering the backend detection logic and Flask API server.</p>
+          <div class="tech-tag">Backend</div>
+        </div>
+        <div class="tech-card glass-card">
+          <div class="tech-icon">🌶️</div>
+          <h3 class="tech-name">Flask</h3>
+          <p class="tech-desc">Lightweight WSGI framework serving the web interface and REST API endpoints.</p>
+          <div class="tech-tag">Web Framework</div>
+        </div>
+        <div class="tech-card glass-card">
+          <div class="tech-icon">👁️</div>
+          <h3 class="tech-name">OpenCV</h3>
+          <p class="tech-desc">Camera capture, frame processing, annotation and real-time MJPEG video streaming.</p>
+          <div class="tech-tag">Computer Vision</div>
+        </div>
+        <div class="tech-card glass-card">
+          <div class="tech-icon">🤖</div>
+          <h3 class="tech-name">MediaPipe</h3>
+          <p class="tech-desc">Highly optimized ML pipeline delivering a 468-point 3D face mesh in real-time.</p>
+          <div class="tech-tag">Machine Learning</div>
+        </div>
+        <div class="tech-card glass-card">
+          <div class="tech-icon">📐</div>
+          <h3 class="tech-name">SciPy</h3>
+          <p class="tech-desc">Euclidean distance calculations for the EAR algorithm's geometric computations.</p>
+          <div class="tech-tag">Math Library</div>
+        </div>
+        <div class="tech-card glass-card">
+          <div class="tech-icon">🎨</div>
+          <h3 class="tech-name">imutils</h3>
+          <p class="tech-desc">Convenience functions for OpenCV — facial landmark index mapping and array conversions.</p>
+          <div class="tech-tag">Utility</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pipeline ── -->
+  <section class="about-section pipeline-section">
+    <div class="content-container">
+      <div class="section-header">
+        <h2 class="section-title gradient-text">Detection Pipeline</h2>
+        <p class="section-sub">Step-by-step processing of each camera frame</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="pipeline-num">01</div>
+          <div class="pipeline-content glass-card">
+            <h3>Camera Capture</h3>
+            <p>OpenCV reads each frame from the webcam at 640×480 resolution.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">02</div>
+          <div class="pipeline-content glass-card">
+            <h3>Grayscale Conversion</h3>
+            <p>Frame converted to grayscale for faster HOG face detection.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">03</div>
+          <div class="pipeline-content glass-card">
+            <h3>Face Detection</h3>
+            <p>MediaPipe locating the face within the frame.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">04</div>
+          <div class="pipeline-content glass-card">
+            <h3>Landmark Prediction</h3>
+            <p>468 landmark points predicted using the Face Mesh model.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">05</div>
+          <div class="pipeline-content glass-card">
+            <h3>EAR Calculation</h3>
+            <p>Average EAR computed from both eyes using the 6-point geometric formula.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">06</div>
+          <div class="pipeline-content glass-card">
+            <h3>Alert Logic</h3>
+            <p>Frame counter increments on low EAR. At 20 frames → alert triggered.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats Banner ── -->
+  <section class="stats-banner">
+    <div class="content-container">
+      <div class="stats-row">
+        <div class="stat-block">
+          <span class="stat-big">468</span>
+          <span class="stat-lbl">Facial Landmarks</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-big">0.22</span>
+          <span class="stat-lbl">EAR Threshold</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-big">30fps</span>
+          <span class="stat-lbl">Processing Speed</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-big">&lt;1s</span>
+          <span class="stat-lbl">Alert Response Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">👁️ DrowseGuard</span>
+      <span class="footer-copy">Built with OpenCV · MediaPipe · Flask · ❤️</span>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar hamburger
+    const ham = document.getElementById('hamburger');
+    if (ham) {
+      ham.addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open'));
+    }
+    // Scroll navbar
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>
