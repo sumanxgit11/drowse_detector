@@ -37,33 +37,33 @@
       <div class="orb orb-2"></div>
     </div>
     <div class="about-hero-content">
-      <div class="hero-badge"><span class="badge-dot"></span>About The Project</div>
+      <div class="hero-badge"><span class="badge-dot"></span>About The Algorithms</div>
       <h1 class="hero-title">The Science Behind <span class="gradient-text">Driver Safety</span></h1>
       <p class="hero-subtitle">
-        Drowse Detector uses real-time computer vision and machine learning to detect signs of drowsiness 
-        before accidents happen. Here's how it works under the hood.
+        Drowse Detector uses real-time computer vision and WebAssembly machine learning in your browser to detect signs of drowsiness and distraction before accidents happen.
       </p>
     </div>
   </section>
 
-  <!-- ── EAR Explanation ── -->
+  <!-- ── Algorithms Explanation ── -->
   <section class="about-section">
     <div class="content-container">
       <div class="section-header">
-        <h2 class="section-title gradient-text">Eye Aspect Ratio (EAR)</h2>
-        <p class="section-sub">The mathematical foundation of drowsiness detection</p>
+        <h2 class="section-title gradient-text">Detection Algorithms</h2>
+        <p class="section-sub">Tracking fatigue and distraction simultaneously</p>
       </div>
 
       <div class="ear-grid">
         <div class="ear-diagram glass-card">
-          <div class="eye-diagram">
-            <div class="eye-shape">
-              <div class="landmark-point lp-p1" title="P1"><span class="lp-label">P1</span></div>
-              <div class="landmark-point lp-p2" title="P2"><span class="lp-label">P2</span></div>
-              <div class="landmark-point lp-p3" title="P3"><span class="lp-label">P3</span></div>
-              <div class="landmark-point lp-p4" title="P4"><span class="lp-label">P4</span></div>
-              <div class="landmark-point lp-p5" title="P5"><span class="lp-label">P5</span></div>
-              <div class="landmark-point lp-p6" title="P6"><span class="lp-label">P6</span></div>
+          <div class="eye-diagram" style="padding-bottom:20px;">
+            <h4 style="color:#fff;text-align:center;margin-bottom:15px;">Eye Aspect Ratio (EAR)</h4>
+            <div class="eye-shape" style="transform: scale(0.8); margin:0 auto;">
+              <div class="landmark-point lp-p1"><span class="lp-label">P1</span></div>
+              <div class="landmark-point lp-p2"><span class="lp-label">P2</span></div>
+              <div class="landmark-point lp-p3"><span class="lp-label">P3</span></div>
+              <div class="landmark-point lp-p4"><span class="lp-label">P4</span></div>
+              <div class="landmark-point lp-p5"><span class="lp-label">P5</span></div>
+              <div class="landmark-point lp-p6"><span class="lp-label">P6</span></div>
             </div>
             <div class="ear-formula">
               EAR = (||P2-P6|| + ||P3-P5||) / (2 × ||P1-P4||)
@@ -74,18 +74,18 @@
         <div class="ear-info">
           <div class="info-block glass-card">
             <div class="info-icon">📐</div>
-            <h3>The Formula</h3>
-            <p>EAR measures the ratio of eye opening to eye width using 6 specific facial landmarks around each eye.</p>
+            <h3>EAR for Drowsiness</h3>
+            <p>Monitors 6 key landmarks around the eyes. An EAR below <strong class="accent">0.22</strong> indicates closed eyelids. Triggered after 20 frames.</p>
           </div>
           <div class="info-block glass-card">
-            <div class="info-icon">🎯</div>
-            <h3>The Threshold</h3>
-            <p>An EAR below <strong class="accent">0.22</strong> indicates closed/nearly-closed eyes. If sustained for 20+ frames, drowsiness is declared.</p>
+            <div class="info-icon">🥱</div>
+            <h3>MAR for Yawning</h3>
+            <p>Calculates the Mouth Aspect Ratio (MAR) using 4 inner lip landmarks. An MAR above <strong class="accent">0.50</strong> detects wide yawning motions.</p>
           </div>
           <div class="info-block glass-card">
-            <div class="info-icon">⚡</div>
-            <h3>Real-time Speed</h3>
-            <p>Processing runs at up to 30 FPS, providing near-instantaneous response to eye closure events.</p>
+            <div class="info-icon">🔄</div>
+            <h3>Head Pose for Distraction</h3>
+            <p>Analyzes the 3D facial transformation matrix to extract Pitch and Yaw. Detects when the driver drops their head or looks away from the road.</p>
           </div>
         </div>
       </div>
@@ -97,44 +97,38 @@
     <div class="content-container">
       <div class="section-header">
         <h2 class="section-title gradient-text">Technology Stack</h2>
-        <p class="section-sub">Built on industry-proven computer vision libraries</p>
+        <p class="section-sub">100% Client-Side Edge AI Architecture</p>
       </div>
       <div class="tech-grid">
         <div class="tech-card glass-card">
-          <div class="tech-icon">🐍</div>
-          <h3 class="tech-name">Python 3</h3>
-          <p class="tech-desc">Core language powering the backend detection logic and Flask API server.</p>
-          <div class="tech-tag">Backend</div>
+          <div class="tech-icon">🤖</div>
+          <h3 class="tech-name">MediaPipe Tasks</h3>
+          <p class="tech-desc">Highly optimized ML pipeline delivering a 468-point 3D face mesh directly in the browser.</p>
+          <div class="tech-tag">WebAssembly AI</div>
         </div>
         <div class="tech-card glass-card">
-          <div class="tech-icon">🌶️</div>
-          <h3 class="tech-name">Flask</h3>
-          <p class="tech-desc">Lightweight WSGI framework serving the web interface and REST API endpoints.</p>
-          <div class="tech-tag">Web Framework</div>
+          <div class="tech-icon">⚡</div>
+          <h3 class="tech-name">Vanilla Javascript</h3>
+          <p class="tech-desc">Handles real-time camera capture, complex euclidean math geometries, and UI updates safely.</p>
+          <div class="tech-tag">Frontend Rendering</div>
         </div>
         <div class="tech-card glass-card">
-          <div class="tech-icon">👁️</div>
-          <h3 class="tech-name">OpenCV</h3>
-          <p class="tech-desc">Camera capture, frame processing, annotation and real-time MJPEG video streaming.</p>
+          <div class="tech-icon">📷</div>
+          <h3 class="tech-name">HTML5 Canvas</h3>
+          <p class="tech-desc">Extracts frames from the local webcam and draws bounding boxes and alert overlays.</p>
           <div class="tech-tag">Computer Vision</div>
         </div>
         <div class="tech-card glass-card">
-          <div class="tech-icon">🤖</div>
-          <h3 class="tech-name">MediaPipe</h3>
-          <p class="tech-desc">Highly optimized ML pipeline delivering a 468-point 3D face mesh in real-time.</p>
-          <div class="tech-tag">Machine Learning</div>
+          <div class="tech-icon">🔊</div>
+          <h3 class="tech-name">Web Audio API</h3>
+          <p class="tech-desc">Generates piercing double-beep emergency oscillator sounds instantly via the browser context.</p>
+          <div class="tech-tag">Alarms</div>
         </div>
         <div class="tech-card glass-card">
-          <div class="tech-icon">📐</div>
-          <h3 class="tech-name">SciPy</h3>
-          <p class="tech-desc">Euclidean distance calculations for the EAR algorithm's geometric computations.</p>
-          <div class="tech-tag">Math Library</div>
-        </div>
-        <div class="tech-card glass-card">
-          <div class="tech-icon">🎨</div>
-          <h3 class="tech-name">imutils</h3>
-          <p class="tech-desc">Convenience functions for OpenCV — facial landmark index mapping and array conversions.</p>
-          <div class="tech-tag">Utility</div>
+          <div class="tech-icon">🌶️</div>
+          <h3 class="tech-name">Flask Gunicorn</h3>
+          <p class="tech-desc">Lightweight WSGI Python server utilized solely to host and serve the application files to the public cloud.</p>
+          <div class="tech-tag">Web Hosting</div>
         </div>
       </div>
     </div>
@@ -144,55 +138,47 @@
   <section class="about-section pipeline-section">
     <div class="content-container">
       <div class="section-header">
-        <h2 class="section-title gradient-text">Detection Pipeline</h2>
-        <p class="section-sub">Step-by-step processing of each camera frame</p>
+        <h2 class="section-title gradient-text">Client-Side Processing Pipeline</h2>
+        <p class="section-sub">Step-by-step frame processing in the browser</p>
       </div>
       <div class="pipeline">
         <div class="pipeline-step">
           <div class="pipeline-num">01</div>
           <div class="pipeline-content glass-card">
             <h3>Camera Capture</h3>
-            <p>OpenCV reads each frame from the webcam at 640×480 resolution.</p>
+            <p>Browser requests native camera access without sending video data to external servers.</p>
           </div>
           <div class="pipeline-arrow">→</div>
         </div>
         <div class="pipeline-step">
           <div class="pipeline-num">02</div>
           <div class="pipeline-content glass-card">
-            <h3>Grayscale Conversion</h3>
-            <p>Frame converted to grayscale for faster HOG face detection.</p>
+            <h3>WebAssembly Inference</h3>
+            <p>MediaPipe processes the RGB video frame directly utilizing the device GPU/CPU.</p>
           </div>
           <div class="pipeline-arrow">→</div>
         </div>
         <div class="pipeline-step">
           <div class="pipeline-num">03</div>
           <div class="pipeline-content glass-card">
-            <h3>Face Detection</h3>
-            <p>MediaPipe locating the face within the frame.</p>
+            <h3>Landmark Matrix Generation</h3>
+            <p>468 facial landmarks and a 4x4 facial transformation matrix are generated simultaneously.</p>
           </div>
           <div class="pipeline-arrow">→</div>
         </div>
         <div class="pipeline-step">
           <div class="pipeline-num">04</div>
           <div class="pipeline-content glass-card">
-            <h3>Landmark Prediction</h3>
-            <p>468 landmark points predicted using the Face Mesh model.</p>
+            <h3>Mathematical Thresholding</h3>
+            <p>Javascript decodes the matrix into Pitch/Yaw, and calculates EAR and MAR distances.</p>
           </div>
           <div class="pipeline-arrow">→</div>
         </div>
         <div class="pipeline-step">
           <div class="pipeline-num">05</div>
           <div class="pipeline-content glass-card">
-            <h3>EAR Calculation</h3>
-            <p>Average EAR computed from both eyes using the 6-point geometric formula.</p>
-          </div>
-          <div class="pipeline-arrow">→</div>
-        </div>
-        <div class="pipeline-step">
-          <div class="pipeline-num">06</div>
-          <div class="pipeline-content glass-card">
-            <h3>Alert Logic</h3>
-            <p>Frame counter increments on low EAR. At 20 frames → alert triggered.</p>
+            <h3>Dynamic Alert Triggers</h3>
+            <p>Specific alarms (Drowsy, Yawning, Distracted) trigger depending on frame consecutives.</p>
           </div>
         </div>
       </div>
@@ -212,8 +198,8 @@
           <span class="stat-lbl">EAR Threshold</span>
         </div>
         <div class="stat-block">
-          <span class="stat-big">30fps</span>
-          <span class="stat-lbl">Processing Speed</span>
+          <span class="stat-big">3.0.3</span>
+          <span class="stat-lbl">Flask Routing</span>
         </div>
         <div class="stat-block">
           <span class="stat-big">&lt;1s</span>
@@ -227,7 +213,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <span class="footer-brand">👁️ Drowse Detector</span>
-      <span class="footer-copy">Built with OpenCV · MediaPipe · Flask · ❤️</span>
+      <span class="footer-copy">Built with Flask · MediaPipe WebAssembly · Vanilla JS · ❤️</span>
       <div class="footer-links">
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
