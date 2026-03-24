@@ -329,6 +329,26 @@ function updateMetricsUI(data) {
                                           'linear-gradient(90deg, #3b82f6, #8b5cf6)';
   }
 
+  const earGaugeNeedle = document.getElementById('earGaugeNeedle');
+  if (earGaugeNeedle) {
+    if (!running) {
+      earGaugeNeedle.style.left = '50%';
+    } else {
+      const ePct = Math.min(ear / 0.5, 1) * 100;
+      earGaugeNeedle.style.left = ePct + '%';
+    }
+  }
+
+  const marGaugeNeedle = document.getElementById('marGaugeNeedle');
+  if (marGaugeNeedle) {
+    if (!running) {
+      marGaugeNeedle.style.left = '0%';
+    } else {
+      const mPct = Math.min(mar / 1.0, 1) * 100;
+      marGaugeNeedle.style.left = mPct + '%';
+    }
+  }
+
   const pill = document.getElementById('detectionStatus');
   if (pill) {
     let pillText = 'Running';

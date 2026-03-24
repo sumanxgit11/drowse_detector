@@ -154,28 +154,44 @@
               <span class="metric-label">Total Alerts</span>
               <span class="metric-value accent" id="totalAlerts">0</span>
             </div>
-          </div>
-        </div>
-
-
-
-        <!-- Threshold Gauge -->
-        <div class="card gauge-card">
-          <div class="card-header">
-            <h3 class="card-title">EAR Safety Gauge</h3>
-          </div>
-          <div class="gauge-wrapper">
-            <div class="gauge-track">
-              <div class="gauge-zone zone-danger">Danger</div>
-              <div class="gauge-zone zone-warning">Caution</div>
-              <div class="gauge-zone zone-safe">Safe</div>
-              <div class="gauge-needle" id="gaugeNeedle"></div>
+            <div class="metrics-gauges" style="margin-top: 1.5rem; border-top: 1px solid var(--border-glass); padding-top: 1rem;">
+              <div class="gauge-container" style="margin-bottom: 1rem;">
+                <div class="gauge-header" style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                  <span class="gauge-title" style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">EAR Safety (Drowsiness)</span>
+                  <span class="gauge-note" style="font-size: 0.72rem; font-weight: 500; color: var(--accent-red);">&lt; 0.22 Alert</span>
+                </div>
+                <div class="gauge-wrapper compact" style="margin: 0;">
+                  <div class="gauge-track" style="height: 20px;">
+                    <div class="gauge-zone zone-danger" style="flex: 0.44; font-size: 0.6rem;">Danger</div>
+                    <div class="gauge-zone zone-warning" style="flex: 0.26; font-size: 0.6rem;">Caution</div>
+                    <div class="gauge-zone zone-safe" style="flex: 0.3; font-size: 0.6rem;">Safe</div>
+                    <div class="gauge-needle" id="earGaugeNeedle"></div>
+                  </div>
+                  <div class="gauge-labels" style="font-size: 0.65rem; padding-top: 0.2rem;">
+                    <span>0.0</span><span>0.22</span><span>0.35</span><span>0.5+</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="gauge-container">
+                <div class="gauge-header" style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                  <span class="gauge-title" style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">MAR Safety (Yawning)</span>
+                  <span class="gauge-note" style="font-size: 0.72rem; font-weight: 500; color: var(--accent-red);">&gt; 0.50 Alert</span>
+                </div>
+                <div class="gauge-wrapper compact" style="margin: 0;">
+                  <div class="gauge-track" style="height: 20px;">
+                    <div class="gauge-zone zone-safe" style="flex: 0.4; font-size: 0.6rem;">Safe</div>
+                    <div class="gauge-zone zone-warning" style="flex: 0.1; font-size: 0.6rem;">Caut</div>
+                    <div class="gauge-zone zone-danger" style="flex: 0.5; font-size: 0.6rem;">Danger</div>
+                    <div class="gauge-needle" id="marGaugeNeedle"></div>
+                  </div>
+                  <div class="gauge-labels" style="font-size: 0.65rem; padding-top: 0.2rem;">
+                    <span>0.0</span><span>0.40</span><span>0.50</span><span>1.0+</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="gauge-labels">
-              <span>0.0</span><span>0.22</span><span>0.35</span><span>0.5+</span>
-            </div>
           </div>
-          <p class="gauge-note">Threshold: EAR &lt; <strong>0.22</strong> triggers drowsiness</p>
         </div>
 
       </div><!-- /info-panel -->
