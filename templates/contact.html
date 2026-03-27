@@ -20,6 +20,10 @@
         <span class="brand-text">Drowse Detector</span>
       </a>
       <ul class="nav-links">
+        <li class="menu-header">
+          <span class="menu-title">Menu</span>
+          <button class="close-menu" id="closeMenu" aria-label="Close menu">&times;</button>
+        </li>
         <li><a href="/" class="nav-link">Home</a></li>
         <li><a href="/about" class="nav-link">About</a></li>
         <li><a href="/contact" class="nav-link active">Contact</a></li>
@@ -146,8 +150,16 @@
 
   <script>
     // Navbar
+    function toggleMobileMenu() {
+      const nav = document.querySelector('.nav-links');
+      if (!nav) return;
+      const isOpen = nav.classList.toggle('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
     const ham = document.getElementById('hamburger');
-    if (ham) ham.addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open'));
+    const closeBtn = document.getElementById('closeMenu');
+    if (ham) ham.addEventListener('click', toggleMobileMenu);
+    if (closeBtn) closeBtn.addEventListener('click', toggleMobileMenu);
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });

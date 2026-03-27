@@ -373,9 +373,15 @@ window.addEventListener('scroll', () => {
   if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-const hamburger = document.getElementById('hamburger');
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    document.querySelector('.nav-links')?.classList.toggle('open');
-  });
+function toggleMobileMenu() {
+  const nav = document.querySelector('.nav-links');
+  if (!nav) return;
+  const isOpen = nav.classList.toggle('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
+
+const hamburger = document.getElementById('hamburger');
+const closeBtn = document.getElementById('closeMenu');
+
+if (hamburger) hamburger.addEventListener('click', toggleMobileMenu);
+if (closeBtn) closeBtn.addEventListener('click', toggleMobileMenu);

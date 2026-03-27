@@ -142,6 +142,35 @@ a { text-decoration: none; color: inherit; }
   transition: var(--transition);
 }
 
+/* ── Mobile Menu Header ── */
+.menu-header {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+}
+.menu-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.close-menu {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+  line-height: 1;
+}
+.close-menu:hover {
+  color: var(--accent-red);
+}
+
 /* ══════════════════════════════════════
    Hero Section
 ══════════════════════════════════════ */
@@ -568,7 +597,8 @@ a { text-decoration: none; color: inherit; }
     background: rgba(5,9,18,0.97);
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 1.5rem;
     gap: 1.5rem;
     font-size: 1.2rem;
     transform: translateX(100%);
@@ -576,6 +606,7 @@ a { text-decoration: none; color: inherit; }
     z-index: 999;
   }
   .nav-links.open { transform: translateX(0); }
+  .menu-header { display: flex; }
   
   .main-container { padding: 1rem 0.5rem 3rem; width: 100%; box-sizing: border-box; overflow-x: hidden; }
   .card { padding: 1rem; width: 100%; box-sizing: border-box; }
