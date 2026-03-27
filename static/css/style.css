@@ -363,6 +363,7 @@ a { text-decoration: none; color: inherit; }
   aspect-ratio: 4/3;
   max-height: 55vh;
   margin: 0 auto 1.25rem auto;
+  width: 100%;
   max-width: 100%;
 }
 .video-feed {
