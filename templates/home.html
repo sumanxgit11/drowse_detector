@@ -91,8 +91,8 @@
           </div>
         </div>
         <div class="video-wrapper" style="position: relative; overflow: hidden; background: #000;">
-          <video id="webcamVideo" autoplay playsinline style="display: none;"></video>
-          <canvas id="outputCanvas" width="640" height="480" class="video-feed" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 10;"></canvas>
+          <video id="webcamVideo" class="video-feed" autoplay playsinline style="display: none; z-index: 5;"></video>
+          <canvas id="outputCanvas" width="640" height="480" class="video-feed" style="display: none; z-index: 10;"></canvas>
           <div class="video-placeholder" id="videoPlaceholder" style="z-index: 20;">
             <div class="placeholder-icon">📷</div>
             <p>Click <strong>Start Detection</strong> to begin</p>

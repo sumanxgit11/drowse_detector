@@ -234,6 +234,7 @@ window.startDetection = async function() {
       isRunning = true;
       document.getElementById('videoPlaceholder')?.classList.add('hidden');
       video.style.display = "block";
+      if (canvasElement) canvasElement.style.display = "block";
       
       btnStart.disabled = true;
       btnStop.disabled  = false;
@@ -257,6 +258,7 @@ window.stopDetection = function() {
   }
   video.srcObject = null;
   video.style.display = "none";
+  if (canvasElement) canvasElement.style.display = "none";
   
   if (canvasCtx) {
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
