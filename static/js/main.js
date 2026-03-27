@@ -377,7 +377,13 @@ function toggleMobileMenu() {
   const nav = document.querySelector('.nav-links');
   if (!nav) return;
   const isOpen = nav.classList.toggle('open');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (isOpen) {
+    document.documentElement.classList.add('no-scroll');
+    document.body.classList.add('no-scroll');
+  } else {
+    document.documentElement.classList.remove('no-scroll');
+    document.body.classList.remove('no-scroll');
+  }
 }
 
 const hamburger = document.getElementById('hamburger');

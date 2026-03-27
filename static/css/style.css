@@ -608,6 +608,11 @@ a { text-decoration: none; color: inherit; }
   .nav-links.open { transform: translateX(0); }
   .menu-header { display: flex; }
   
+  html.no-scroll, body.no-scroll {
+    overflow: hidden !important;
+    touch-action: none;
+  }
+  
   .main-container { padding: 1rem 0.5rem 3rem; width: 100%; box-sizing: border-box; overflow-x: hidden; }
   .card { padding: 1rem; width: 100%; box-sizing: border-box; }
   .info-panel .card { min-width: 100%; width: 100%; box-sizing: border-box; }
