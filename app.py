@@ -1,11 +1,14 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from db_models import db, User
 
+load_dotenv()
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'fc8c34fbc87af8172df8942b'  # Random secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'fc8c34fbc87af8172df8942b') 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///site.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -34,6 +37,11 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html")
 
 # ─── Auth Routes ─────────────────────────────────────────────────────────────
 @app.route("/signup", methods=['GET', 'POST'])
@@ -98,4 +106,4 @@ if __name__ == "__main__":
     print("\n  Drowsiness Detector Web Server starting...")
     print("  Serving frontend UI (MediaPipe runs in browser)")
     print("   Open http://127.0.0.1:5000 in your browser\n")
-    app.run(debug=False, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)

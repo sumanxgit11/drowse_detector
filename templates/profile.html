@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile – Drowse Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <style>
+    .profile-container {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 1rem 4rem;
+    }
+    .profile-card {
+      width: 100%;
+      max-width: 500px;
+      padding: 3rem;
+      text-align: center;
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--gradient-brand);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+      box-shadow: var(--shadow-glow);
+    }
+    .profile-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .profile-email {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .profile-info {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.3rem;}
+    .info-value { font-size: 1.05rem; font-weight: 500; color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="brand-icon">👁️</span>
+        <span class="brand-text">Drowse Detector</span>
+      </a>
+      <ul class="nav-links">
+        <li class="menu-header">
+          <span class="menu-title">Menu</span>
+          <button class="close-menu" id="closeMenu" aria-label="Close menu">&times;</button>
+        </li>
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="/profile" class="nav-link active">Profile</a></li>
+        <li><a href="/logout" class="nav-link">Logout</a></li>
+        {% else %}
+        <li><a href="/login" class="nav-link">Login</a></li>
+        <li><a href="/signup" class="nav-link">Sign Up</a></li>
+        {% endif %}
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Flash Messages -->
+  <div class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}">
+            <span>{{ message }}</span>
+            <span style="cursor:pointer;opacity:0.7;padding-left:1rem;font-size:1.2rem;" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <section class="profile-container">
+    <div class="glass-card profile-card">
+      <div class="profile-avatar">{{ current_user.name[0] | upper }}</div>
+      <h1 class="profile-title">Welcome, {{ current_user.name.split(' ')[0] }}!</h1>
+      <p class="profile-email">Manage your profile information</p>
+      
+      <div class="profile-info">
+        <div class="info-row">
+          <span class="info-label">Full Name</span>
+          <span class="info-value">{{ current_user.name }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email Address</span>
+          <span class="info-value">{{ current_user.email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Account ID</span>
+          <span class="info-value">#{{ current_user.id }}</span>
+        </div>
+      </div>
+      
+      <a href="/" class="btn btn-start" style="width:100%">Go to Dashboard</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">👁️ Drowse Detector</span>
+      <span class="footer-copy">Copyright - Suman Negel</span>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const nav = document.querySelector('.nav-links');
+      if (!nav) return;
+      const isOpen = nav.classList.toggle('open');
+      if (isOpen) {
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+      } else {
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+      }
+    }
+    const ham = document.getElementById('hamburger');
+    const closeBtn = document.getElementById('closeMenu');
+    if (ham) ham.addEventListener('click', toggleMobileMenu);
+    if (closeBtn) closeBtn.addEventListener('click', toggleMobileMenu);
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>
